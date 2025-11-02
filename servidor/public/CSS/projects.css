@@ -1,0 +1,25 @@
+body{
+    background-color: darkgray;
+}
+
+table a:hover{
+    color:darkolivegreen;
+}
+table a{
+    color:gold;
+    text-decoration: none;
+}
+table{
+    border-collapse: collapse;
+    width: 40%;
+    border-spacing: 0;
+
+}
+td, tr{
+    border: 1px solid black;
+    text-align: center;
+}
+
+#linkindex{
+    color: greenyellow;
+}
