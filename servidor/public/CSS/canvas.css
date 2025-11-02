@@ -1,3 +1,36 @@
-#casinha{
-    background-color: cyan;
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: bisque;
+  color: #111;
+  padding: 12px;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+a { color: #0645AD; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+#casinha {
+  background-color: cyan;
+  display: block;
+  margin: 10px;
+}
+
+#formas {
+  background-color: white;
+  display: block;
+  margin: 10px;
+}
+
+/* faz o link ficar em uma linha inteira abaixo dos canvases e centralizado */
+.baixo-link {
+  flex-basis: 100%;
+  text-align: center;
+  margin-top: 8px;
+  color: inherit;
 }
