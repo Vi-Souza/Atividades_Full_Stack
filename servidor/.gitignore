@@ -1,0 +1,24 @@
+# dependências
+node_modules/
+
+# variáveis de ambiente
+.env
+
+# logs e arquivos temporários
+npm-debug.log*
+yarn-debug.log*
+npm-debug.log
+yarn-error.log
+
+# builds
+dist/
+build/
+
+# editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# lockfiles alternativos (opcional)
+.pnpm-store/
