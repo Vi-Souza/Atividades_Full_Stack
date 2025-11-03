@@ -1,34 +1,100 @@
-/* servem para tirar margens e espacamentos que os navegadores colocam*/ 
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+/* Estrutura principal */
 .estrutura {
-    background-color: bisque;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: Arial, sans-serif;
+  background-color: pink; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: "Arial", sans-serif;
+  padding: 24px;
+  transition: background-color 250ms ease;
 }
 
+/* Título */
 .titulo {
-    margin-bottom: 20px;
-    font-size: 24px;
+  font-size: 1.6rem;
+  color: #222;
+  text-align: center;
 }
 
+/* Input */
 .input {
-    padding: 10px;
-    font-size: 16px;
-    width: 220px;
-    margin-bottom: 10px;
+  width: 260px;
+  max-width: 90%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  background-color: #fff;
+  color: #111;
+  text-align: center;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
+/* Placeholder visível e legível */
+.input::placeholder {
+  color: #888;
+  opacity: 1;
+}
+
+/* Estado de foco do input */
+.input:focus {
+  border-color: #6b5b95;
+  box-shadow: 0 0 0 4px rgba(107, 91, 149, 0.08);
+}
+
+/* Botão */
 .enviar {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #6b5b95;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+
+/* Hover / Active do botão */
+.enviar:hover {
+  background-color: #5a487c;
+}
+.enviar:active {
+  transform: translateY(0);
+}
+
+/* Mensagem exibida ao usuário */
+.mensagem {
+  min-height: 1.4em; /* evita "pular" conteúdo quando a mensagem aparece */
+  font-size: 1rem;
+  color: #111;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+/*mensagens de erro/sucesso (controladas no JS) */
+.mensagem.sucesso {
+  background-color: rgba(0, 128, 0, 0.2);
+  color: #0b3;
+}
+.mensagem.erro {
+  background-color: rgba(255, 0, 0, 0.12);
+  color: #900;
+}
+
+/* faz o link ficar em uma linha inteira abaixo e centralizado */
+.baixo-link {
+  text-align: center;
+  color: inherit;
 }
