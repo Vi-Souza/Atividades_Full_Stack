@@ -84,3 +84,59 @@ app.post('/login', (req, res) => {
 app.listen(80, () => {
   console.log('Servidor rodando na porta 80...');
 });
+
+// Conecta ao MongoDB de forma assíncrona e segura
+const mongodb = require("mongodb");
+const MongoClient = mongodb.MongoClient;
+const uri = "mongodb+srv://Vi_Souza:Souza0508!@fullstack.jjld6av.mongodb.net/?appName=FullStack";
+
+MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(client => {
+    const dbo = client.db("exemplo_bd");
+    const usuariosbd = dbo.collection("usuarios");
+
+    // Rota para cadastrar usuário no MongoDB
+    app.post("/cadastrar_usuario", (req, resp) => {
+      const data = {
+        db_nome: req.body.nome,
+        db_login: req.body.login,
+        db_senha: req.body.senha
+      };
+
+      usuariosbd.insertOne(data)
+        .then(() => {
+          resp.render('resposta_usuario', { resposta: "Usuário cadastrado com sucesso!" });
+        })
+        .catch(err => {
+          console.error("Erro ao cadastrar:", err);
+          resp.render('resposta_usuario', { resposta: "Erro ao cadastrar usuário!" });
+        });
+    });
+
+    // Rota para logar usuário no MongoDB
+    app.post("/logar_usuario", (req, resp) => {
+      const data = {
+        db_login: req.body.login,
+        db_senha: req.body.senha
+      };
+
+      usuariosbd.find(data).toArray()
+        .then(items => {
+          if (items.length === 0) {
+            resp.render('resposta_usuario', { resposta: "Usuário/senha não encontrado!" });
+          } else {
+            resp.render('resposta_usuario', { resposta: "Usuário logado com sucesso!" });
+          }
+        })
+        .catch(err => {
+          console.error("Erro ao logar:", err);
+          resp.render('resposta_usuario', { resposta: "Erro ao logar usuário!" });
+        });
+    });
+
+    console.log("MongoDB conectado e rotas /cadastrar_usuario e /logar_usuario ativadas.");
+  })
+  .catch(err => {
+    console.error("Erro ao conectar ao MongoDB:", err);
+  });
+
