@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Resultado</title>
+  <link rel="stylesheet" href="/CSS/atv8.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Resultado</h1>
+    <% if (sucesso) { %>
+      <p style="color:green"><strong><%= mensagem %></strong></p>
+    <% } else { %>
+      <p style="color:red"><strong><%= mensagem %></strong></p>
+    <% } %>
+    <p><a href="/projects.html">Voltar para Projetos</a></p>
+    <p><a href="/login.html">Ir para Login</a> | <a href="/cadastro.html">Ir para Cadastro</a></p>
+  </div>
+</body>
+</html>

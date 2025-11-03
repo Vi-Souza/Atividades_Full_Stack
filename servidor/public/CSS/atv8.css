@@ -1,0 +1,43 @@
+/* Cor do fundo e fonte básica */
+body {
+  background: linear-gradient(135deg,#f0f4f8,#dfefff);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container centralizado */
+.container {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  width: 320px;
+  text-align: center;
+}
+
+/* Form e inputs */
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 8px 10px;
+  margin: 8px 0 12px 0;
+  border: 1px solid #ccd6e6;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 14px;
+  background: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
