@@ -14,8 +14,10 @@ app.use(express.static('./public'));
 // cria o servidor
 var server = http.createServer(app);
 
-// define o número da porta que o servidor ouvirá
-server.listen(3000);
+app.use(express.static('./public'));
 
-// mensagem exibida no console para debug
-console.log("servidor rodando...");
+const PORT = process.env.PORT || 80;
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
