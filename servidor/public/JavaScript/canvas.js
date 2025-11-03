@@ -1,6 +1,3 @@
-/* canvas.js - contém ambos os scripts encapsulados */
-
-/* === script do projeto 1 (casinha) === */
 (function CanvasCasinhaModule(){
   const canvas = document.getElementById('casinha');
   if (!canvas) return;
@@ -89,7 +86,6 @@
     ctx.closePath();
   }
 
-  // desenha ao carregar DOM
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', draw);
   } else {
@@ -99,7 +95,6 @@
   window.__CanvasCasinha = { draw };
 })();
 
-/* === script do projeto 2 (formas) === */
 (function CanvasFormasModule(){
   const canvas = document.getElementById('formas');
   if (!canvas) return;
