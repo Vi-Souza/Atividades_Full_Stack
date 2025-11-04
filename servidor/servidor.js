@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const mongodb = require("mongodb");
 
 // Inicializa o app Express
 const app = express();
@@ -34,11 +35,10 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// Rota para processar o formulário de cadastro
+// Rota para processar o formulário de cadastro (em memória)
 app.post('/cadastra', (req, res) => {
   const { username, password, nome } = req.body;
 
-  // Verifica se o usuário já existe
   const existe = usuarios.find(u => u.username === username);
   if (existe) {
     return res.render('resposta', {
@@ -48,10 +48,8 @@ app.post('/cadastra', (req, res) => {
     });
   }
 
-  // Adiciona novo usuário
   usuarios.push({ username, password, nome });
 
-  // Renderiza resposta de sucesso
   res.render('resposta', {
     sucesso: true,
     acao: 'cadastro',
@@ -59,11 +57,10 @@ app.post('/cadastra', (req, res) => {
   });
 });
 
-// Rota para processar o formulário de login
+// Rota para processar o formulário de login (em memória)
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
-  // Verifica se usuário existe e senha está correta
   const usuario = usuarios.find(u => u.username === username && u.password === password);
   if (usuario) {
     res.render('resposta', {
@@ -85,10 +82,9 @@ app.listen(80, () => {
   console.log('Servidor rodando na porta 80...');
 });
 
-// Conecta ao MongoDB de forma assíncrona e segura
-const mongodb = require("mongodb");
+// Conecta ao MongoDB
 const MongoClient = mongodb.MongoClient;
-const uri = "mongodb+srv://Vi_Souza:Souza0508!@fullstack.jjld6av.mongodb.net/?appName=FullStack";
+const uri = "mongodb+srv://Vi_Souza:Souza0508!@fullstack.jjld6av.mongodb.net/exemplo_bd?retryWrites=true&w=majority";
 
 MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(client => {
@@ -105,11 +101,17 @@ MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
       usuariosbd.insertOne(data)
         .then(() => {
-          resp.render('resposta_usuario', { resposta: "Usuário cadastrado com sucesso!" });
+          resp.render('blog', {
+            resposta: "Usuário cadastrado com sucesso!",
+            voltarPara: "/login_db.html"
+          });
         })
         .catch(err => {
           console.error("Erro ao cadastrar:", err);
-          resp.render('resposta_usuario', { resposta: "Erro ao cadastrar usuário!" });
+          resp.render('blog', {
+            resposta: "Erro ao cadastrar usuário!",
+            voltarPara: "/cadastro_db.html"
+          });
         });
     });
 
@@ -123,14 +125,23 @@ MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
       usuariosbd.find(data).toArray()
         .then(items => {
           if (items.length === 0) {
-            resp.render('resposta_usuario', { resposta: "Usuário/senha não encontrado!" });
+            resp.render('blog', {
+              resposta: "Usuário/senha não encontrado!",
+              voltarPara: "/login_db.html"
+            });
           } else {
-            resp.render('resposta_usuario', { resposta: "Usuário logado com sucesso!" });
+            resp.render('blog', {
+              resposta: "Usuário logado com sucesso!",
+              voltarPara: "/projects.html"
+            });
           }
         })
         .catch(err => {
           console.error("Erro ao logar:", err);
-          resp.render('resposta_usuario', { resposta: "Erro ao logar usuário!" });
+          resp.render('blog', {
+            resposta: "Erro ao logar usuário!",
+            voltarPara: "/login_db.html"
+          });
         });
     });
 
